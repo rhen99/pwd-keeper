@@ -3,12 +3,7 @@ import PwdItemComponent from "./PwdItemComponent.vue";
 </script>
 
 <template>
-  <ul>
-    <li><pwd-item-component /></li>
-    <li><pwd-item-component /></li>
-    <li><pwd-item-component /></li>
-    <li><pwd-item-component /></li>
-  </ul>
+  <div class="container"></div>
 </template>
 
 <style scoped></style>

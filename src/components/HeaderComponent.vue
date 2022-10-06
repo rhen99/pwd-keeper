@@ -1,7 +1,11 @@
 <script setup></script>
 
 <template>
-  <h1>Header</h1>
+  <nav class="header">
+    <div class="container">
+      <h3 class="header-logo">Pwd Keeper</h3>
+    </div>
+  </nav>
 </template>
 
 <style scoped></style>
