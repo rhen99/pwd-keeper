@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+const props = defineProps(["passwordItem"]);
+</script>
 
 <template>
-  <h1>PwdItem</h1>
+  <p>{{ props.passwordItem.title }} - {{ props.passwordItem.password }}</p>
 </template>
 
 <style scoped></style>
