@@ -18,3 +18,18 @@ body {
   padding: 0 1rem;
   margin: auto;
 }
+.btn {
+  padding: 0.6rem 1.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 5px;
+}
+.btn-primary {
+  background-color: hsl(0, 79%, 58%);
+  color: #fff;
+}
+.btn-secondary {
+  background-color: hsl(0, 0%, 81%);
+  color: #333;
+}

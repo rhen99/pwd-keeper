@@ -16,6 +16,10 @@ const passwordList = reactive([
     title: "Password 3",
     password: "12345",
   },
+  {
+    title: "Password 4",
+    password: "12345",
+  },
 ]);
 </script>
 
