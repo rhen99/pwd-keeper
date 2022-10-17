@@ -1,7 +1,10 @@
-<script setup></script>
-
+<script setup>
+import LoginComponent from "../components/LoginComponent.vue";
+</script>
 <template>
-  <h1>Login View</h1>
+  <div class="container">
+    <login-component />
+  </div>
 </template>
 
 <style scoped></style>
