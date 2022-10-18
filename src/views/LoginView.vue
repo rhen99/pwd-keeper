@@ -7,4 +7,8 @@ import LoginComponent from "../components/LoginComponent.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+div {
+  margin-top: 3rem;
+}
+</style>
