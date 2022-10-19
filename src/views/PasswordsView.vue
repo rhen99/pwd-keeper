@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from "vue";
-import PwdListComponent from "../components/PwdListComponent.vue";
+import PasswordListComponent from "../components/PasswordListComponent.vue";
+import AddPasswordComponent from "../components/AddPasswordComponent.vue";
 
 const passwordList = reactive([
   {
@@ -23,7 +24,17 @@ const passwordList = reactive([
 </script>
 
 <template>
-  <pwd-list-component :passwordList="passwordList" />
+  <div class="container">
+    <div>
+      <button class="btn btn-primary">Add Password</button>
+    </div>
+    <add-password-component />
+    <password-list-component :passwordList="passwordList" />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container div:first-child {
+  padding: 1.5rem 0;
+}
+</style>
