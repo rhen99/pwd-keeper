@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import PasswordListComponent from "../components/PasswordListComponent.vue";
 import AddPasswordComponent from "../components/AddPasswordComponent.vue";
 
@@ -21,14 +21,23 @@ const passwordList = reactive([
     password: "12345",
   },
 ]);
+const addPasswordModalOpen = ref(false);
+
+const openPasswordModal = () => (addPasswordModalOpen.value = true);
+const closePasswordModal = () => (addPasswordModalOpen.value = false);
 </script>
 
 <template>
   <div class="container">
     <div>
-      <button class="btn btn-primary">Add Password</button>
+      <button class="btn btn-primary" @click="openPasswordModal">
+        Add Password
+      </button>
     </div>
-    <add-password-component />
+    <add-password-component
+      :open="addPasswordModalOpen"
+      @close="closePasswordModal"
+    />
     <password-list-component :passwordList="passwordList" />
   </div>
 </template>

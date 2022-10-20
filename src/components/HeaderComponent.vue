@@ -17,5 +17,6 @@
   font-size: 1.8rem;
   font-weight: 300;
   padding: 0.7rem 0;
+
 }
 </style>

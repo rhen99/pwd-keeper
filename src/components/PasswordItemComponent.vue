@@ -1,11 +1,11 @@
 <script setup>
-const props = defineProps(["passwordItem"]);
+defineProps(["passwordItem"]);
 </script>
 
 <template>
   <div>
     <p>
-      {{ props.passwordItem.title }}
+      {{ passwordItem.title }}
     </p>
     <a class="btn btn-primary" href="#">Copy</a>
     <a class="btn btn-secondary" href="#">Delete</a>

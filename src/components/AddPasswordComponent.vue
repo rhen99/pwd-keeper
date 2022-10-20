@@ -1,23 +1,49 @@
 <script setup>
-//const props = defineProps([]);
+defineProps(["open"]);
+import { reactive } from "vue";
+const newPassword = reactive({
+  value: "",
+  isActive: false,
+});
+const confirmPassword = reactive({
+  value: "",
+  isActive: false,
+});
+const focusInput = (input) => (input.isActive = true);
+const blurInput = (input) =>
+  input.value === "" ? (input.isActive = false) : null;
 </script>
 
 <template>
-  <div class="modal-backdrop">
+  <div class="modal-backdrop" :class="{ open }">
     <div class="modal">
       <div class="modal-title">
         <h3>Add New Password</h3>
-        <a href="#" class="modal-close">&times;</a>
+        <a href="#" @click.prevent="() => $emit('close')" class="modal-close"
+          >&times;</a
+        >
       </div>
       <div class="modal-body">
         <form>
-          <div class="form-group">
+          <div class="form-group" :class="{ write: newPassword.isActive }">
             <label for="new_password">Enter Password</label>
-            <input type="password" id="new_password" />
+            <input
+              type="password"
+              v-model="newPassword.value"
+              id="new_password"
+              @focus="focusInput(newPassword)"
+              @blur="blurInput(newPassword)"
+            />
           </div>
-          <div class="form-group">
+          <div class="form-group" :class="{ write: confirmPassword.isActive }">
             <label for="confirm_password">Re-enter Password</label>
-            <input type="password" id="confirm_password" />
+            <input
+              type="password"
+              v-model="confirmPassword.value"
+              id="confirm_password"
+              @focus="focusInput(confirmPassword)"
+              @blur="blurInput(confirmPassword)"
+            />
           </div>
           <div class="form-group">
             <button class="btn btn-primary">Submit Password</button>
@@ -35,12 +61,17 @@
   width: 100%;
   height: 100vh;
   background-color: hsla(0, 0%, 20%, 0.1);
+  display: none;
+}
+.open {
+  display: block;
 }
 .modal {
   background-color: #fff;
   width: 30%;
   margin: 3rem auto 0 auto;
   padding: 2rem;
+  animation: show 300ms ease-in forwards;
 }
 .modal-title {
   position: relative;
@@ -80,10 +111,20 @@ label {
 }
 .write label {
   font-size: 13px;
-  top: -30%;
+  top: 0;
   color: hsl(0, 79%, 58%);
 }
 .write input {
   border-color: hsl(0, 79%, 58%);
+}
+@keyframes show {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
