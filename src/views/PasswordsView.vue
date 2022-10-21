@@ -21,6 +21,7 @@ const passwordList = reactive([
     password: "12345",
   },
 ]);
+
 const addPasswordModalOpen = ref(false);
 
 const openPasswordModal = () => (addPasswordModalOpen.value = true);
