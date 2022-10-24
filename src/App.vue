@@ -22,7 +22,7 @@ const setUserKey = (key) => {
 
 <template>
   <header-component />
-  <passwords-view v-if="userKey !== ''" />
+  <passwords-view v-if="userKey !== ''" :userKey="userKey" />
   <login-view @set-user="setUserKey" v-else />
 </template>
 

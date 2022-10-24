@@ -1,5 +1,6 @@
 <script setup>
 defineProps(["passwordItem"]);
+defineEmits(["delete"]);
 </script>
 
 <template>
@@ -8,7 +9,12 @@ defineProps(["passwordItem"]);
       {{ passwordItem.title }}
     </p>
     <a class="btn btn-primary" href="#">Copy</a>
-    <a class="btn btn-secondary" href="#">Delete</a>
+    <a
+      class="btn btn-secondary"
+      @click.prevent="() => $emit('delete', passwordItem.id)"
+      href="#"
+      >Delete</a
+    >
   </div>
 </template>
 
@@ -23,5 +29,8 @@ p {
 }
 div:last-child {
   border: none;
+}
+.btn {
+  margin: 0 5px;
 }
 </style>

@@ -1,31 +1,38 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import PasswordListComponent from "../components/PasswordListComponent.vue";
 import AddPasswordComponent from "../components/AddPasswordComponent.vue";
 
-const passwordList = reactive([
-  {
-    title: "Password 1",
-    password: "12345",
-  },
-  {
-    title: "Password 2",
-    password: "12345",
-  },
-  {
-    title: "Password 3",
-    password: "12345",
-  },
-  {
-    title: "Password 4",
-    password: "12345",
-  },
-]);
+const props = defineProps(["userKey"]);
+
+const passwordList = ref(JSON.parse(localStorage.getItem(props.userKey)));
 
 const addPasswordModalOpen = ref(false);
 
 const openPasswordModal = () => (addPasswordModalOpen.value = true);
 const closePasswordModal = () => (addPasswordModalOpen.value = false);
+const addPassword = (newPassword) => {
+  const passwordDoc = JSON.parse(localStorage.getItem(props.userKey));
+  if (!passwordDoc) {
+    return alert("Passwords not found.");
+  }
+  const newPasswordDoc = [...passwordDoc, newPassword];
+
+  localStorage.setItem(props.userKey, JSON.stringify(newPasswordDoc));
+
+  passwordList.value = [...newPasswordDoc];
+};
+const deletePassword = (id) => {
+  const passwordDoc = JSON.parse(localStorage.getItem(props.userKey));
+  if (!passwordDoc) {
+    return alert("Passwords not found.");
+  }
+  const newPasswordDoc = passwordDoc.filter((doc) => doc.id !== id);
+
+  localStorage.setItem(props.userKey, JSON.stringify(newPasswordDoc));
+
+  passwordList.value = [...newPasswordDoc];
+};
 </script>
 
 <template>
@@ -38,13 +45,22 @@ const closePasswordModal = () => (addPasswordModalOpen.value = false);
     <add-password-component
       :open="addPasswordModalOpen"
       @close="closePasswordModal"
+      @add-password="addPassword"
     />
-    <password-list-component :passwordList="passwordList" />
+    <password-list-component
+      :passwordList="passwordList"
+      v-if="passwordList.length > 0"
+      @delete-item="deletePassword"
+    />
+    <p v-else>No passwords saved.</p>
   </div>
 </template>
 
 <style scoped>
 .container div:first-child {
   padding: 1.5rem 0;
+}
+p {
+  font-size: 20px;
 }
 </style>

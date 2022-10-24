@@ -1,6 +1,11 @@
 <script setup>
 defineProps(["open"]);
+const emit = defineEmits(["add-password", "close"]);
 import { reactive } from "vue";
+const passwordTitle = reactive({
+  value: "",
+  isActive: false,
+});
 const newPassword = reactive({
   value: "",
   isActive: false,
@@ -12,6 +17,23 @@ const confirmPassword = reactive({
 const focusInput = (input) => (input.isActive = true);
 const blurInput = (input) =>
   input.value === "" ? (input.isActive = false) : null;
+const handleSubmit = () => {
+  if (!passwordTitle.value || !newPassword.value || !confirmPassword.value) {
+    return alert("Fill in all fields.");
+  }
+  if (newPassword.value !== confirmPassword.value) {
+    return alert("Passwords don't match.");
+  }
+  emit("add-password", {
+    id: Math.round(Math.random() * 1000000),
+    title: passwordTitle.value,
+    password: newPassword.value,
+  });
+  passwordTitle.value = "";
+  newPassword.value = "";
+  confirmPassword.value = "";
+  blur();
+};
 </script>
 
 <template>
@@ -24,7 +46,17 @@ const blurInput = (input) =>
         >
       </div>
       <div class="modal-body">
-        <form>
+        <form @submit.prevent="handleSubmit">
+          <div class="form-group" :class="{ write: passwordTitle.isActive }">
+            <label for="password_title">Enter Title</label>
+            <input
+              type="text"
+              v-model="passwordTitle.value"
+              id="password_title"
+              @focus="focusInput(passwordTitle)"
+              @blur="blurInput(passwordTitle)"
+            />
+          </div>
           <div class="form-group" :class="{ write: newPassword.isActive }">
             <label for="new_password">Enter Password</label>
             <input

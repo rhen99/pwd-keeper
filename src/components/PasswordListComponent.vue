@@ -1,12 +1,14 @@
 <script setup>
 import PasswordItemComponent from "./PasswordItemComponent.vue";
-const props = defineProps(["passwordList"]);
+defineProps(["passwordList"]);
+defineEmits(["delete-item"]);
 </script>
 
 <template>
   <password-item-component
-    v-for="(password, index) in props.passwordList"
-    :key="index"
+    @delete="(id) => $emit('delete-item', id)"
+    v-for="password in passwordList"
+    :key="password.id"
     :passwordItem="password"
   />
 </template>
