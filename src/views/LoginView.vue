@@ -8,7 +8,7 @@ const checkOnBlur = () =>
 </script>
 <template>
   <div class="container">
-    <form @submit.prevent="() => $emit('set-user', inputValue.value)">
+    <form @submit.prevent="() => $emit('set-user', inputValue)">
       <div class="form-inline">
         <div class="form-group" :class="{ write: isWriteClass }">
           <label for="login">Enter Login Password</label>
