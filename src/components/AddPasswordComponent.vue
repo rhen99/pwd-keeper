@@ -17,6 +17,14 @@ const confirmPassword = reactive({
 const focusInput = (input) => (input.isActive = true);
 const blurInput = (input) =>
   input.value === "" ? (input.isActive = false) : null;
+const clearForm = () => {
+  passwordTitle.value = "";
+  newPassword.value = "";
+  confirmPassword.value = "";
+  passwordTitle.isActive = false;
+  newPassword.isActive = false;
+  confirmPassword.isActive = false;
+};
 const handleSubmit = () => {
   if (!passwordTitle.value || !newPassword.value || !confirmPassword.value) {
     return alert("Fill in all fields.");
@@ -29,10 +37,8 @@ const handleSubmit = () => {
     title: passwordTitle.value,
     password: newPassword.value,
   });
-  passwordTitle.value = "";
-  newPassword.value = "";
-  confirmPassword.value = "";
-  blur();
+  emit("close");
+  clearForm();
 };
 </script>
 
