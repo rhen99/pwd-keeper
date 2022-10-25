@@ -155,6 +155,16 @@ label {
 .write input {
   border-color: hsl(0, 79%, 58%);
 }
+@media (max-width: 768px) {
+  .modal {
+    width: 80%;
+  }
+}
+@media (max-width: 500px) {
+  .form-group:nth-child(4) {
+    text-align: center;
+  }
+}
 @keyframes show {
   from {
     transform: translateY(-20px);
