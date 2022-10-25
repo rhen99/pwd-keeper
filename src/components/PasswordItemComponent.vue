@@ -1,6 +1,15 @@
 <script setup>
-defineProps(["passwordItem"]);
+import { ref } from "vue";
+const props = defineProps(["passwordItem"]);
 defineEmits(["delete"]);
+
+const passwordValue = ref(props.passwordItem.password);
+const copyPassword = () => {
+  navigator.clipboard
+    .writeText(passwordValue.value)
+    .then(() => alert("Copied to clipbaord."))
+    .catch(() => alert("Copy failed."));
+};
 </script>
 
 <template>
@@ -8,7 +17,7 @@ defineEmits(["delete"]);
     <p>
       {{ passwordItem.title }}
     </p>
-    <a class="btn btn-primary" href="#">Copy</a>
+    <a class="btn btn-primary" href="#" @click.prevent="copyPassword">Copy</a>
     <a
       class="btn btn-secondary"
       @click.prevent="() => $emit('delete', passwordItem.id)"

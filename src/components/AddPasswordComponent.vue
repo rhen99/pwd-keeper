@@ -1,7 +1,7 @@
 <script setup>
+import { reactive } from "vue";
 defineProps(["open"]);
 const emit = defineEmits(["add-password", "close"]);
-import { reactive } from "vue";
 const passwordTitle = reactive({
   value: "",
   isActive: false,
