@@ -72,4 +72,9 @@ label {
 .write input {
   border-color: hsl(0, 79%, 58%);
 }
+@media (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+}
 </style>
